@@ -68,6 +68,11 @@
 
 (global-set-key (kbd "C-c C-c") 'hs-toggle-hiding)
 
+(defun file-string (file)
+    "Read the contents of a file and return as a string."
+    (with-temp-buffer
+      (insert-file-contents file)
+      (buffer-string)))
 
 ;; jabber
 ;(add-to-list 'load-path "emacs-jabber")
@@ -78,7 +83,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(jabber-account-list (quote (("mariano.benedettini@surhive.com" (:password . nil) (:network-server . "chat.surhive.com") (:connection-type . ssl)))))
+ '(jabber-account-list (quote (("mariano.benedettini@surhive.com" (:network-server . "chat.surhive.com") (:connection-type . ssl)))))
  '(jabber-auto-reconnect t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -89,3 +94,15 @@
  '(jabber-chat-prompt-local ((t (:foreground "sky blue" :weight normal))))
  '(jabber-chat-prompt-system ((t (:foreground "medium spring green" :weight normal))))
  '(jabber-roster-user-online ((t (:foreground "deep sky blue" :slant normal :weight normal)))))
+
+(defun trim-string (string)
+  "Remove white spaces in beginning and ending of STRING.
+White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
+(replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" "" string))
+)
+
+(defun surhive-conectar ()
+  (interactive)
+  (setq jpassword (trim-string (file-string "~/surhive-jabber-password")))
+  (jabber-connect "mariano.benedettini" "surhive.com" "mariano" nil jpassword "chat.surhive.com" nil 'ssl)
+)
