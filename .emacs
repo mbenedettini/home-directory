@@ -66,7 +66,9 @@
 (require 'twittering-mode)
 (setq twittering-use-master-password t)
 
+; keybindings
 (global-set-key (kbd "C-c C-c") 'hs-toggle-hiding)
+;(global-set-key (kbd "C-i") 'imenu)
 
 (defun file-string (file)
     "Read the contents of a file and return as a string."
@@ -106,3 +108,6 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
   (setq jpassword (trim-string (file-string "~/surhive-jabber-password")))
   (jabber-connect "mariano.benedettini" "surhive.com" "mariano" nil jpassword "chat.surhive.com" nil 'ssl)
 )
+
+;; php-mode
+(load "php-mode")
