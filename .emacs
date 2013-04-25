@@ -68,6 +68,8 @@
 
 ; keybindings
 (global-set-key (kbd "C-c C-c") 'hs-toggle-hiding)
+(global-set-key (kbd "C-c C--") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-c C-s") 'magit-status)
 ;(global-set-key (kbd "C-i") 'imenu)
 
 (defun file-string (file)
