@@ -70,6 +70,8 @@
 (global-set-key (kbd "C-c C-c") 'hs-toggle-hiding)
 (global-set-key (kbd "C-c C--") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-c C-s") 'magit-status)
+(global-set-key (kbd "C-c C-i") 'imenu)
+
 ;(global-set-key (kbd "C-i") 'imenu)
 
 (defun file-string (file)
@@ -88,7 +90,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(jabber-account-list (quote (("mariano.benedettini@surhive.com" (:network-server . "chat.surhive.com") (:connection-type . ssl)))))
- '(jabber-auto-reconnect t))
+ '(jabber-auto-reconnect t)
+ '(magit-repo-dirs (quote ("\"~/work/bet3000/sportsbook\" \"~/work/webdev\" \"~/work/home-directory\""))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -113,3 +116,4 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 
 ;; php-mode
 (load "php-mode")
+
