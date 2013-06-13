@@ -114,6 +114,20 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
   (jabber-connect "mariano.benedettini" "surhive.com" "mariano" nil jpassword "chat.surhive.com" nil 'ssl)
 )
 
-;; php-mode
 (load "php-mode")
 
+(require 'swbuff-x)
+(global-set-key (kbd "<s-tab>") 'swbuff-switch-to-next-buffer)
+(global-set-key (kbd "<S-s-iso-lefttab>") 'swbuff-switch-to-previous-buffer)
+(custom-set-variables
+ '(swbuff-clear-delay 2)
+ '(swbuff-display-intermediate-buffers t t)
+ '(swbuff-exclude-buffer-regexps (quote ("^ " "*Completions*" "*Messages*" "*scratch")))
+)
+
+;; imenu-tree
+(eval-after-load "tree-widget"
+  '(if (boundp 'tree-widget-themes-load-path)
+       (add-to-list 'tree-widget-themes-load-path "~/.emacs.d/")))
+(autoload 'imenu-tree "imenu-tree" "Imenu tree" t)
+(autoload 'tags-tree "tags-tree" "TAGS tree" t)
