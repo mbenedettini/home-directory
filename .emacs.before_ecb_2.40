@@ -106,13 +106,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.40")
  '(jabber-account-list (quote (("mariano.benedettini@surhive.com" (:network-server . "chat.surhive.com") (:connection-type . ssl)))))
  '(jabber-auto-reconnect t)
- '(magit-repo-dirs (quote ("\"~/work/bet3000/sportsbook\" \"~/work/webdev\" \"~/work/home-directory\"")))
- '(swbuff-clear-delay 2)
- '(swbuff-display-intermediate-buffers t t)
- '(swbuff-exclude-buffer-regexps (quote ("^ " "*Completions*" "*Messages*" "*scratch"))))
+ '(magit-repo-dirs (quote ("\"~/work/bet3000/sportsbook\" \"~/work/webdev\" \"~/work/home-directory\""))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -140,7 +136,11 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (require 'swbuff-x)
 (global-set-key (kbd "<s-tab>") 'swbuff-switch-to-next-buffer)
 (global-set-key (kbd "<S-s-iso-lefttab>") 'swbuff-switch-to-previous-buffer)
-
+(custom-set-variables
+ '(swbuff-clear-delay 2)
+ '(swbuff-display-intermediate-buffers t t)
+ '(swbuff-exclude-buffer-regexps (quote ("^ " "*Completions*" "*Messages*" "*scratch")))
+)
 
 ;; imenu-tree
 (eval-after-load "tree-widget"
@@ -151,4 +151,3 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 
 ;; ecb workaround
 (setq stack-trace-on-error t)
-(require 'ecb)
