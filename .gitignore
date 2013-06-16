@@ -5,3 +5,4 @@ auto-save-list
 .emacs.d/.smex-items
 .emacs.d/myetags
 .emacs.d/url/cookies
+.emacs.d/backups
