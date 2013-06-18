@@ -139,6 +139,9 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 (add-hook 'js2-mode-hook (lambda () (interactive) (column-marker-1 80)))
 
+;; perl-mode customization
+(add-hook 'perl-mode-hook (lambda () (interactive) (column-marker-1) 80))
+
 (require 'swbuff-x)
 (global-set-key (kbd "<s-tab>") 'swbuff-switch-to-next-buffer)
 (global-set-key (kbd "<S-s-iso-lefttab>") 'swbuff-switch-to-previous-buffer)
