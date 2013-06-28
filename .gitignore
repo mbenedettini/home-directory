@@ -6,3 +6,4 @@ auto-save-list
 .emacs.d/myetags
 .emacs.d/url/cookies
 .emacs.d/backups
+.emacs.d/eshell
