@@ -55,8 +55,8 @@
 ;(setq tab-always-indent 'complete)
 ;(add-to-list 'completion-styles 'initials t)
 (setq-default indent-tabs-mode nil)
-
-;(setq-default tab-width 4)
+(setq-default tab-width 4)
+(setq c-basic-offset 4)
 
 ;(custom-set-variables
   ;; custom-set-variables was added by Custom.
@@ -87,7 +87,9 @@
 (global-set-key (kbd "C-c C-s") 'magit-status)
 (global-set-key (kbd "C-c C-i") 'imenu)
 
-;(global-set-key (kbd "C-i") 'imenu)
+(require 'magit-commit-training-wheels)
+(ad-activate 'magit-log-edit-commit)
+
 
 (defun file-string (file)
     "Read the contents of a file and return as a string."
@@ -108,6 +110,7 @@
  '(jabber-account-list (quote (("mariano.benedettini@surhive.com" (:network-server . "chat.surhive.com") (:connection-type . ssl)))))
  '(jabber-auto-reconnect t)
  '(magit-repo-dirs (quote ("\"~/work/bet3000/sportsbook\" \"~/work/webdev\" \"~/work/home-directory\"")))
+ '(php-mode-coding-style (quote symfony2))
  '(swbuff-clear-delay 2)
  '(swbuff-display-intermediate-buffers t t)
  '(swbuff-exclude-buffer-regexps (quote ("^ " "*Completions*" "*Messages*" "*scratch"))))
@@ -134,8 +137,32 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 )
 
 (load "php-mode")
-(load "js2-mode")
+;; Better indentation for php-mode
+;; (defun clean-php-mode ()
+;;   (interactive)
+;;   (php-mode)
+;;   (setq c-basic-offset 4) ; 2 tabs indenting
+;;   (setq indent-tabs-mode nil)
+;;   (setq fill-column 80)
+;;   (c-set-offset 'case-label '+)
+;;   (c-set-offset 'arglist-close 'c-lineup-arglist-operators))
+;; (c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
+;; (c-set-offset 'arglist-cont-nonempty 'c-lineup-math) ; for DBTNG
+;;                                         ; fields and values
+;; PHP
+;; (defun my-php-mode-common-hook ()
+;;   (set-variable 'indent-tabs-mode nil)
+;;   (c-set-offset 'class-open 0)
+;;   (c-set-offset 'inline-open 0)
+;;   (c-set-offset 'substatement-open 0)
+;;   (setq c-default-style "bsd"
+;;         c-basic-offset 4))
+;; (add-hook 'php-mode-hook 'my-php-mode-common-hook)
 
+(add-hook 'php-mode-hook (lambda () (interactive) (column-marker-1 80)))
+
+
+(load "js2-mode")
 ;; js2-mode customization
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
@@ -165,12 +192,24 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (require 'ecb)
 
 ;; web-mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)) 
+;; (require 'web-mode)
+;; (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tpl\\.ph\p\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;; (require 'magit-commit-training-wheels)
+;; (ad-activate 'magit-log-edit-commit)
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+;; python
+(add-hook 'python-mode-hook (lambda () (interactive) (column-marker-1 80)))
+
+;; css
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
