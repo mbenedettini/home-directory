@@ -17,7 +17,7 @@
   (package-refresh-contents))
 
 ;; Add in your own as you wish:
-(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings)
+(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker jabber js2-mode ac-js2 magit magit-log-edit php-mode python-mode web-mode)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
@@ -167,6 +167,8 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 (add-hook 'js2-mode-hook (lambda () (interactive) (column-marker-1 80)))
+                                
+(setq js2-pretty-multiline-declarations t) 
 
 ;; ac-js2
 (setq ac-js2-evaluate-calls t)
@@ -210,6 +212,11 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 
 ;; python
 (add-hook 'python-mode-hook (lambda () (interactive) (column-marker-1 80)))
+(require 'python-mode)
+(require 'virtualenvwrapper)
+;; (venv-initialize-interactive-shells) ;; if you want interactive shell support
+;; (venv-initialize-eshell) ;; if you want eshell support
+(setq venv-location "~/.virtualenvs/")
 
 ;; css
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
