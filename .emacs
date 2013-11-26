@@ -109,6 +109,7 @@
  '(ecb-options-version "2.40")
  '(jabber-account-list (quote (("mariano.benedettini@surhive.com" (:network-server . "chat.surhive.com") (:connection-type . ssl)))))
  '(jabber-auto-reconnect t)
+ '(magit-item-highlight-face (quote bold))
  '(magit-repo-dirs (quote ("/Users/mariano/work")))
  '(magit-repo-dirs-depth 2)
  '(php-mode-coding-style (quote symfony2))
@@ -124,7 +125,10 @@
  '(jabber-chat-prompt-foreign ((t (:foreground "orange" :weight normal))))
  '(jabber-chat-prompt-local ((t (:foreground "sky blue" :weight normal))))
  '(jabber-chat-prompt-system ((t (:foreground "medium spring green" :weight normal))))
- '(jabber-roster-user-online ((t (:foreground "deep sky blue" :slant normal :weight normal)))))
+ '(jabber-roster-user-online ((t (:foreground "deep sky blue" :slant normal :weight normal))))
+ '(magit-diff-add ((t (:inherit diff-added :foreground "green3"))))
+ '(magit-diff-del ((t (:inherit diff-removed :background "IndianRed4" :foreground "tomato"))))
+ '(magit-item-highlight ((t (:inherit secondary-selection :background "gray19" :foreground "#ffffff")))))
 
 (defun trim-string (string)
   "Remove white spaces in beginning and ending of STRING.
