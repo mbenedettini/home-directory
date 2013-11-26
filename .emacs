@@ -109,7 +109,8 @@
  '(ecb-options-version "2.40")
  '(jabber-account-list (quote (("mariano.benedettini@surhive.com" (:network-server . "chat.surhive.com") (:connection-type . ssl)))))
  '(jabber-auto-reconnect t)
- '(magit-repo-dirs (quote ("\"~/work/bet3000/sportsbook\" \"~/work/webdev\" \"~/work/home-directory\"")))
+ '(magit-repo-dirs (quote ("/Users/mariano/work")))
+ '(magit-repo-dirs-depth 2)
  '(php-mode-coding-style (quote symfony2))
  '(swbuff-clear-delay 2)
  '(swbuff-display-intermediate-buffers t t)
@@ -119,6 +120,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "#2e3436" :foreground "#eeeeec" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "apple" :family "PT_Mono"))))
  '(jabber-chat-prompt-foreign ((t (:foreground "orange" :weight normal))))
  '(jabber-chat-prompt-local ((t (:foreground "sky blue" :weight normal))))
  '(jabber-chat-prompt-system ((t (:foreground "medium spring green" :weight normal))))
