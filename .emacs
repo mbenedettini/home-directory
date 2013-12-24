@@ -17,7 +17,7 @@
   (package-refresh-contents))
 
 ;; Add in your own as you wish:
-(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker jabber js2-mode ac-js2 magit magit-log-edit php-mode python-mode web-mode)
+(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker jabber js2-mode ac-js2 magit magit-log-edit php-mode python-mode web-mode guide-key)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
@@ -226,3 +226,7 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 
 ;; css
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
+
+(require 'guide-key)
+(setq guide-key/guide-key-sequence '("C-c" ))
+(guide-key-mode 1) ; Enable guide-key-mode
