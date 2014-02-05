@@ -1,3 +1,4 @@
+
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
@@ -16,8 +17,9 @@
   (package-refresh-contents))
 
 ;; Add in your own as you wish:
-(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker jabber js2-mode ac-js2 magit magit-log-edit php-mode python-mode guide-key)
+(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker jabber js2-mode ac-js2 magit php-mode python-mode guide-key web-mode yaml-mode)
   "A list of packages to ensure are installed at launch.")
+;; (defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -86,8 +88,8 @@
 (global-set-key (kbd "C-c C-s") 'magit-status)
 (global-set-key (kbd "C-c C-i") 'imenu)
 
-(require 'magit-commit-training-wheels)
-(ad-activate 'magit-log-edit-commit)
+;; (require 'magit-commit-training-wheels)
+;; (ad-activate 'magit-log-edit-commit)
 
 
 (defun file-string (file)
@@ -105,7 +107,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.40")
+ '(debug-on-error t)
  '(jabber-account-list (quote (("mariano.benedettini@surhive.com" (:network-server . "chat.surhive.com") (:connection-type . ssl)))))
  '(jabber-auto-reconnect t)
  '(magit-item-highlight-face (quote bold))
@@ -194,10 +196,6 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (autoload 'imenu-tree "imenu-tree" "Imenu tree" t)
 (autoload 'tags-tree "tags-tree" "TAGS tree" t)
 
-;; ecb workaround
-(setq stack-trace-on-error t)
-(require 'ecb)
-
 ;; web-mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -210,7 +208,7 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (setq web-mode-markup-indent-offset 4)
 (setq web-mode-css-indent-offset 4)
-
+(add-hook 'web-mode-hook (lambda () (interactive) (column-marker-1 80)))
 
 ;; (require 'magit-commit-training-wheels)
 ;; (ad-activate 'magit-log-edit-commit)
@@ -221,10 +219,6 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 ;; python
 (add-hook 'python-mode-hook (lambda () (interactive) (column-marker-1 80)))
 (require 'python-mode)
-(require 'virtualenvwrapper)
-;; (venv-initialize-interactive-shells) ;; if you want interactive shell support
-;; (venv-initialize-eshell) ;; if you want eshell support
-(setq venv-location "~/.virtualenvs/")
 
 ;; css
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
