@@ -17,7 +17,7 @@
   (package-refresh-contents))
 
 ;; Add in your own as you wish:
-(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker jabber js2-mode ac-js2 magit php-mode python-mode guide-key web-mode yaml-mode)
+(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker jabber js2-mode ac-js2 magit php-mode python-mode guide-key web-mode yaml-mode expand-region)
   "A list of packages to ensure are installed at launch.")
 ;; (defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker))
 
@@ -226,3 +226,10 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (require 'guide-key)
 (setq guide-key/guide-key-sequence '("C-c" ))
 (guide-key-mode 1) ; Enable guide-key-mode
+
+;; dired reuse buffers
+(toggle-diredp-find-file-reuse-dir 1)
+
+;; expand-region
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
