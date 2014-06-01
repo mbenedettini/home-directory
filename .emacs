@@ -101,14 +101,12 @@
 ;; jabber
 ;(add-to-list 'load-path "emacs-jabber")
 ;; For 0.7.90 and above:
-(require 'jabber-autoloads)
+;; (require 'jabber-autoloads)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(debug-on-error t)
- '(jabber-account-list (quote (("mariano.benedettini@surhive.com" (:network-server . "chat.surhive.com") (:connection-type . ssl)))))
  '(jabber-auto-reconnect t)
  '(magit-item-highlight-face (quote bold))
  '(magit-repo-dirs (quote ("/Users/mariano/work")))
