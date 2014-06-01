@@ -123,6 +123,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#2e3436" :foreground "#eeeeec" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "PT_Mono"))))
+ '(hl-line ((t (:background "black"))))
  '(jabber-chat-prompt-foreign ((t (:foreground "orange" :weight normal))))
  '(jabber-chat-prompt-local ((t (:foreground "sky blue" :weight normal))))
  '(jabber-chat-prompt-system ((t (:foreground "medium spring green" :weight normal))))
