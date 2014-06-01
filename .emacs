@@ -233,3 +233,38 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 ;; expand-region
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
+
+;; nvm
+(require 'nvm)
+(defun do-nvm-use (version)
+  (interactive "sVersion: ")
+  (nvm-use version)
+  (exec-path-from-shell-copy-env "PATH"))
+(do-nvm-use "0.10")
+
+;; js-comint
+(setq inferior-js-mode-hook
+      (lambda ()
+        ;; We like nice colors
+        (ansi-color-for-comint-mode-on)
+        ;; Deal with some prompt nonsense
+        (add-to-list
+         'comint-preoutput-filter-functions
+         (lambda (output)
+           (replace-regexp-in-string "\033\\[[0-9]+[A-Z]" "" output)))))
+
+(require 'js-comint)
+(setq inferior-js-program-command "node")
+
+
+;; tern
+(add-to-list 'load-path "/Users/mariano/work/tern/emacs/")
+(autoload 'tern-mode "tern.el" nil t)
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+
+(projectile-global-mode)
+
