@@ -17,7 +17,7 @@
   (package-refresh-contents))
 
 ;; Add in your own as you wish:
-(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker jabber js2-mode ac-js2 magit php-mode python-mode guide-key web-mode yaml-mode expand-region)
+(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker jabber js2-mode ac-js2 magit php-mode python-mode guide-key web-mode yaml-mode expand-region dired+ dired-k peep-dired)
   "A list of packages to ensure are installed at launch.")
 ;; (defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings column-marker))
 
