@@ -209,6 +209,7 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (setq web-mode-markup-indent-offset 4)
 (setq web-mode-css-indent-offset 4)
 (add-hook 'web-mode-hook (lambda () (interactive) (column-marker-1 80)))
+(eval-after-load 'web-mode '(define-key web-mode-map (kbd "C-c C--") 'web-mode-comment-or-uncomment))
 
 ;; (require 'magit-commit-training-wheels)
 ;; (ad-activate 'magit-log-edit-commit)
