@@ -108,8 +108,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(jabber-auto-reconnect t)
+ '(jabber-history-enabled t)
  '(magit-item-highlight-face (quote bold))
- '(magit-repo-dirs (quote ("/Users/mariano/work")))
+ '(magit-repo-dirs (quote ("/Volumes/bet3000" "~/work")))
  '(magit-repo-dirs-depth 2)
  '(php-mode-coding-style (quote symfony2))
  '(swbuff-clear-delay 2)
