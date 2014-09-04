@@ -8,4 +8,9 @@ auto-save-list
 .emacs.d/backups
 .emacs.d/eshell
 .emacs.d/elpa
+.emacs.d/.python-environments
+.emacs.d/games/
+.emacs.d/jabber-avatar-cache/
+.emacs.d/jabber-history/
+.emacs.d/projectile-bookmarks.eld
 
