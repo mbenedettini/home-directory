@@ -261,11 +261,27 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 ;; tern
 (add-to-list 'load-path "/Users/mariano/work/tern/emacs/")
 (autoload 'tern-mode "tern.el" nil t)
-(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+;;(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 (eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
 
 (projectile-global-mode)
+(setq projectile-switch-project-action 'projectile-dired)
+
+(defun msg-via-notifier (msg)
+  (shell-command (format "/usr/local/bin/terminal-notifier -message '%s'" msg) )
+  )
+
+(defun notify-jabber-notify (from buf text proposed-alert)
+  "(jabber.el hook) Notify of new Jabber chat messages via terminal-notifier"
+  (when (or jabber-message-alert-same-buffer
+            (not (memq (selected-window) (get-buffer-window-list buf))))
+    (if (jabber-muc-sender-p from)
+        (msg-via-notifier (format "(PM) %s"
+                                  (jabber-jid-displayname (jabber-jid-user from)))
+                          (format "%s: %s" (jabber-jid-resource from) text)))
+    (msg-via-notifier (format "%s" (jabber-jid-displayname from))
+                      text)))
 
