@@ -139,7 +139,7 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 
 (defun surhive-conectar ()
   (interactive)
-  (setq jpassword (trim-string (file-string "~/surhive-jabber-password")))
+  (setq jpassword (trim-string (file-string "/Volumes/bet3000/jabber-password")))
   (jabber-connect "mariano.benedettini" "surhive.com" "mariano" nil jpassword "chat.surhive.com" nil 'ssl)
 )
 
