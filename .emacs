@@ -99,7 +99,7 @@
       (buffer-string)))
 
 ;; jabber
-;(add-to-list 'load-path "emacs-jabber")
+(add-to-list 'load-path "emacs-jabber")
 ;; For 0.7.90 and above:
 ;; (require 'jabber-autoloads)
 (custom-set-variables
