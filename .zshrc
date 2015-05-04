@@ -78,3 +78,10 @@ export PATH=/usr/local/bin:/usr/local/share/python:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/mariano/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+
+PERL_MB_OPT="--install_base \"/Users/mariano/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/mariano/perl5"; export PERL_MM_OPT;
