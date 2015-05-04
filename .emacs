@@ -270,18 +270,12 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (projectile-global-mode)
 (setq projectile-switch-project-action 'projectile-dired)
 
-(defun msg-via-notifier (msg)
-  (shell-command (format "/usr/local/bin/terminal-notifier -message '%s'" msg) )
+(defun msg-via-notifier (title msg)
+  (shell-command (format "/usr/local/bin/terminal-notifier -sender org.gnu.Emacs -title '%s' -message '%s'" title msg) )
   )
 
-(defun notify-jabber-notify (from buf text proposed-alert)
-  "(jabber.el hook) Notify of new Jabber chat messages via terminal-notifier"
-  (when (or jabber-message-alert-same-buffer
-            (not (memq (selected-window) (get-buffer-window-list buf))))
-    (if (jabber-muc-sender-p from)
-        (msg-via-notifier (format "(PM) %s"
-                                  (jabber-jid-displayname (jabber-jid-user from)))
-                          (format "%s: %s" (jabber-jid-resource from) text)))
-    (msg-via-notifier (format "%s" (jabber-jid-displayname from))
-                      text)))
+(defun notify-jabber-message (from buf text proposed-alert)
+  (msg-via-notifier from text))
+
+(add-hook 'jabber-alert-message-hooks 'notify-jabber-message)
 
