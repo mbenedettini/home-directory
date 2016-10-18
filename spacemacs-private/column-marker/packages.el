@@ -48,7 +48,7 @@ Each entry is either:
 
     - :location: Specify a custom installation location.
       The following values are legal:
-pp
+
       - The symbol `elpa' (default) means PACKAGE will be
         installed using the Emacs package manager.
 
@@ -58,12 +58,18 @@ pp
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(defun column-marker/init-column-marker ()
+(defun column-marker/init-fill-column-indicator ()
   (use-package fill-column-indicator
     :defer t
-    :init (progn
-            (eval-after-load 'js2-mode
-              (add-hook 'js2-mode-hook (lambda () (interactive) (fci-mode t)))
-              )
-            )))
+    :init
+    (progn
+      (setq fci-rule-column 80)
+      (setq fci-rule-color "gray35")
+      (eval-after-load 'js2-mode
+        (add-hook 'js2-mode-hook 'fci-mode)
+        )
+      )
+    ))
+
+
 ;;; packages.el ends here
