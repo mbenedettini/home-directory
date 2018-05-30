@@ -5,7 +5,10 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="ys"
+#ZSH_THEME="ys"
+
+ZSH_CUSTOM="/Users/mariano/work/home-directory/zsh_custom"
+ZSH_THEME="mariano"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -48,7 +51,7 @@ ZSH_THEME="ys"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew brew-cask node jsontools npm nvm osx)
+plugins=(git brew brew-cask node jsontools npm nvm osx docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -68,16 +71,14 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-export PATH=/usr/local/bin:/usr/local/share/python:$PATH
-. /usr/local/bin/virtualenvwrapper.sh
 
-[ -s $HOME/.nvm/nvm.sh ] && . $HOME/.nvm/nvm.sh # This loads NVM
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+###-tns-completion-start-###
+if [ -f /Users/mariano/.tnsrc ]; then 
+    source /Users/mariano/.tnsrc 
+fi
+###-tns-completion-end-###
 
-PERL_MB_OPT="--install_base \"/Users/mariano/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/mariano/perl5"; export PERL_MM_OPT;
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
