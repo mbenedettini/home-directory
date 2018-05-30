@@ -18,6 +18,11 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     csv
+     windows-scripts
+     php
+     sql
+     markdown
      nginx
      typescript
      html
@@ -40,15 +45,22 @@ values."
      ;; version-control
      yaml
      ;;column-marker
-     auto-completion
+     (auto-completion :variables
+                      spacemacs-default-company-backends '(company-files company-capf))
+     extra-langs
+     ;;typescript
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     rvm
+     (tide :location (recipe :fetcher github :repo "ananthakumaran/tide" :branch "import-autocomplete"))
+     )
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(org-projectile scss-mode)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -248,8 +260,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
   (setq exec-path (append exec-path '("/usr/local/bin")))
-  (global-company-mode t)
-  (setq-default dotspacemacs-line-numbers t)
+  (setq global-company-mode t)
+  (setq fci-rule-column 80)
+  (setq fci-rule-color "gray35")
   )
 
 (defun dotspacemacs/user-config ()
@@ -261,6 +274,25 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.ejs\\'" . html-mode))
+  (add-hook 'js2-mode-hook 'fci-mode)
+  (add-hook 'tide-mode-hook 'fci-mode)
+  (rvm-use-default)
+  (global-undo-tree-mode nil)
+  (add-hook 'json-mode-hook
+            (lambda ()
+              (make-local-variable 'js-indent-level)
+              (setq js-indent-level 2)))
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    ;;(flycheck-mode +1)
+    ;;(setq flycheck-check-syntax-automatically '(save mode-enabled))
+    ;;(eldoc-mode +1)
+    (tide-hl-identifier-mode +1)
+    ;; company is an optional dependency. You have to
+    ;; install it separately via package-install
+    ;; `M-x package-install [ret] company`
+    (company-mode +1))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -270,14 +302,21 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(backup-directory-alist (quote ((".*" . "/tmp"))))
+ '(company-auto-complete t)
+ '(company-idle-delay 1)
+ '(create-lockfiles nil)
+ '(font-lock-global-modes (quote (not speedbar-mode)))
  '(global-company-mode t)
- '(global-undo-tree-mode nil)
  '(js-enabled-frameworks (quote (javascript)))
+ '(js-indent-level 4)
  '(magit-cherry-pick-arguments (quote ("--ff")))
  '(package-selected-packages
    (quote
-    (nginx-mode tide typescript-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data org goto-chg undo-tree diminish uuidgen org-projectile org-download livid-mode skewer-mode simple-httpd link-hint hide-comnt git-link flyspell-correct-helm flyspell-correct eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff dumb-jump f column-enforce-mode helm-company helm-c-yasnippet company-tern dash-functional company-statistics company-quickhelp company auto-yasnippet ac-ispell auto-complete yaml-mode web-beautify tern json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode toc-org smeargle orgit org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets magit-gitflow htmlize helm-gitignore request helm-flyspell gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger flycheck-pos-tip pos-tip flycheck evil-magit magit-popup git-commit with-editor auto-dictionary magit ws-butler window-numbering volatile-highlights vi-tilde-fringe spaceline s powerline smooth-scrolling restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines open-junk-file neotree move-text macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight elisp-slime-nav define-word clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil spacemacs-theme)))
- '(projectile-switch-project-action (quote projectile-vc))
+    (tide emojify csv-mode nlinum org-mime org-category-capture ghub let-alist powershell phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode sql-indent wolfram-mode thrift stan-mode scad-mode qml-mode matlab-mode julia-mode arduino-mode winum fuzzy rvm mmm-mode markdown-toc markdown-mode gh-md nginx-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data org goto-chg undo-tree diminish uuidgen org-projectile org-download livid-mode skewer-mode simple-httpd link-hint hide-comnt git-link flyspell-correct-helm flyspell-correct eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff dumb-jump f column-enforce-mode helm-company helm-c-yasnippet company-tern dash-functional company-statistics company-quickhelp company auto-yasnippet ac-ispell auto-complete yaml-mode web-beautify tern json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode toc-org smeargle orgit org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets magit-gitflow htmlize helm-gitignore request helm-flyspell gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger flycheck-pos-tip pos-tip flycheck evil-magit magit-popup git-commit with-editor auto-dictionary magit ws-butler window-numbering volatile-highlights vi-tilde-fringe spaceline s powerline smooth-scrolling restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines open-junk-file neotree move-text macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight elisp-slime-nav define-word clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil spacemacs-theme)))
+ '(projectile-enable-caching t)
+ '(projectile-switch-project-action (quote projectile-dired))
+ '(scss-sass-command (quote /Users/mariano/\.rvm/gems/ruby-2\.2\.1/bin/sass))
  '(sgml-basic-offset 4)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 (custom-set-faces

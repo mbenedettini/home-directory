@@ -65,8 +65,8 @@ Each entry is either:
     (progn
       (setq fci-rule-column 80)
       (setq fci-rule-color "gray35")
-      (eval-after-load 'js2-mode
-        (add-hook 'js2-mode-hook 'fci-mode)
+      (eval-after-load 'js-mode
+        (add-hook 'js-mode-hook 'fci-mode)
         )
       )
     ))
