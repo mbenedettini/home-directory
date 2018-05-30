@@ -1,8 +1,8 @@
 ;;(disable-theme 'zenburn)
 ;;(setq prelude-theme 'solarized-dark)
 
-(global-linum-mode 1)
-(setq linum-format "%d ")
+;;(global-linum-mode 1)
+;;(setq linum-format "%d ")
 
 (require 'font-lock+)
 
