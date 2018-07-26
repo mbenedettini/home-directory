@@ -18,6 +18,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     python
      csv
      windows-scripts
      php
@@ -48,7 +49,8 @@ values."
      (auto-completion :variables
                       spacemacs-default-company-backends '(company-files company-capf))
      extra-langs
-     ;;typescript
+     typescript
+     react
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -275,6 +277,7 @@ you should place your code here."
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.ejs\\'" . html-mode))
   (add-hook 'js2-mode-hook 'fci-mode)
+  (add-hook 'python-mode-hook 'fci-mode)
   (add-hook 'tide-mode-hook 'fci-mode)
   (rvm-use-default)
   (global-undo-tree-mode nil)
@@ -293,7 +296,24 @@ you should place your code here."
     ;; install it separately via package-install
     ;; `M-x package-install [ret] company`
     (company-mode +1))
-  )
+
+  ;; https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html
+  (require 'js2-refactor)
+  (require 'xref-js2)
+
+  (global-unset-key (kbd "C-c C-r"))
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  (js2r-add-keybindings-with-prefix "C-c C-r")
+  (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+
+  ;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+  ;; unbind it.
+  (define-key js-mode-map (kbd "M-.") nil)
+
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -304,7 +324,8 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(backup-directory-alist (quote ((".*" . "/tmp"))))
  '(company-auto-complete t)
- '(company-idle-delay 1)
+ '(company-minimum-prefix-length 1)
+ '(company-idle-delay .5)
  '(create-lockfiles nil)
  '(font-lock-global-modes (quote (not speedbar-mode)))
  '(global-company-mode t)
@@ -313,9 +334,13 @@ you should place your code here."
  '(magit-cherry-pick-arguments (quote ("--ff")))
  '(package-selected-packages
    (quote
-    (tide emojify csv-mode nlinum org-mime org-category-capture ghub let-alist powershell phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode sql-indent wolfram-mode thrift stan-mode scad-mode qml-mode matlab-mode julia-mode arduino-mode winum fuzzy rvm mmm-mode markdown-toc markdown-mode gh-md nginx-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data org goto-chg undo-tree diminish uuidgen org-projectile org-download livid-mode skewer-mode simple-httpd link-hint hide-comnt git-link flyspell-correct-helm flyspell-correct eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff dumb-jump f column-enforce-mode helm-company helm-c-yasnippet company-tern dash-functional company-statistics company-quickhelp company auto-yasnippet ac-ispell auto-complete yaml-mode web-beautify tern json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode toc-org smeargle orgit org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets magit-gitflow htmlize helm-gitignore request helm-flyspell gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger flycheck-pos-tip pos-tip flycheck evil-magit magit-popup git-commit with-editor auto-dictionary magit ws-butler window-numbering volatile-highlights vi-tilde-fringe spaceline s powerline smooth-scrolling restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines open-junk-file neotree move-text macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight elisp-slime-nav define-word clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil spacemacs-theme)))
+    (xref-js2 yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic tide emojify csv-mode nlinum org-mime org-category-capture ghub let-alist powershell phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode sql-indent wolfram-mode thrift stan-mode scad-mode qml-mode matlab-mode julia-mode arduino-mode winum fuzzy rvm mmm-mode markdown-toc markdown-mode gh-md nginx-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data org goto-chg undo-tree diminish uuidgen org-projectile org-download livid-mode skewer-mode simple-httpd link-hint hide-comnt git-link flyspell-correct-helm flyspell-correct eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff dumb-jump f column-enforce-mode helm-company helm-c-yasnippet company-tern dash-functional company-statistics company-quickhelp company auto-yasnippet ac-ispell auto-complete yaml-mode web-beautify tern json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode toc-org smeargle orgit org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets magit-gitflow htmlize helm-gitignore request helm-flyspell gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger flycheck-pos-tip pos-tip flycheck evil-magit magit-popup git-commit with-editor auto-dictionary magit ws-butler window-numbering volatile-highlights vi-tilde-fringe spaceline s powerline smooth-scrolling restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines open-junk-file neotree move-text macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight elisp-slime-nav define-word clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil spacemacs-theme)))
  '(projectile-enable-caching t)
  '(projectile-switch-project-action (quote projectile-dired))
+ '(safe-local-variable-values
+   (quote
+    ((typescript-indent-level . 2)
+     (js2-basic-offset . 2))))
  '(scss-sass-command (quote /Users/mariano/\.rvm/gems/ruby-2\.2\.1/bin/sass))
  '(sgml-basic-offset 4)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
