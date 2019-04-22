@@ -58,6 +58,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     pt
      rvm
      (tide :location (recipe :fetcher github :repo "ananthakumaran/tide" :branch "import-autocomplete"))
      )
