@@ -82,3 +82,15 @@ fi
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+# [[ -f /Users/mariano/.nvm/v8.4.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/mariano/.nvm/v8.4.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# # tabtab source for sls package
+# # uninstall by removing these lines or running `tabtab uninstall sls`
+# [[ -f /Users/mariano/.nvm/v8.4.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/mariano/.nvm/v8.4.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# # tabtab source for slss package
+# # uninstall by removing these lines or running `tabtab uninstall slss`
+# [[ -f /Users/mariano/.nvm/v10.11.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/mariano/.nvm/v10.11.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
