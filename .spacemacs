@@ -329,6 +329,7 @@ you should place your code here."
   (add-hook 'python-mode-hook 'fci-mode)
   (add-hook 'tide-mode-hook 'fci-mode)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+  (add-hook 'protobuf-mode-hook (lambda () (c-add-style "protobuf-style" '((c-basic-offset . 4) (indent-tabs-mode . nil)) t)))
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
