@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="ys"
 
-ZSH_CUSTOM="/Users/mariano/work/home-directory/zsh_custom"
+ZSH_CUSTOM="/Users/mariano.benedettini/work/home-directory/zsh_custom"
 ZSH_THEME="mariano"
 
 # Example aliases
@@ -51,7 +51,7 @@ ZSH_THEME="mariano"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew brew-cask node jsontools npm nvm osx docker)
+plugins=(git brew node jsontools npm nvm osx docker)
 
 source $ZSH/oh-my-zsh.sh
 
