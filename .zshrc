@@ -94,3 +94,4 @@ export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
 # # tabtab source for slss package
 # # uninstall by removing these lines or running `tabtab uninstall slss`
 # [[ -f /Users/mariano/.nvm/v10.11.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/mariano/.nvm/v10.11.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
+export PATH="/usr/local/opt/node@14/bin:$PATH"
