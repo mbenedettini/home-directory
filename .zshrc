@@ -51,11 +51,11 @@ ZSH_THEME="mariano"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew node jsontools npm nvm osx docker)
+plugins=(git brew node jsontools npm nvm macos docker)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration`export PATH="/Users/mariano/.rvm/gems/ruby-1.9.3-p484/bin:/Users/mariano/.rvm/gems/ruby-1.9.3-p484@global/bin:/Users/mariano/.rvm/rubies/ruby-1.9.3-p484/bin:/Users/mariano/.nvm/v0.10.28/bin:/usr/local/bin:/usr/local/share/python:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/MacGPG2/bin:/Users/mariano/.rvm/bin:/Users/mariano/.rvm/bin"
+# User configuration`export PATH="/Users/mariano/.nvm/v0.10.28/bin:/usr/local/bin:/usr/local/share/python:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/MacGPG2/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -95,3 +95,15 @@ export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
 # # uninstall by removing these lines or running `tabtab uninstall slss`
 # [[ -f /Users/mariano/.nvm/v10.11.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/mariano/.nvm/v10.11.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
 export PATH="/usr/local/opt/node@14/bin:$PATH"
+alias cx="compass"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/compass compass
+export IGNORE_PYTHON_VERSION_REQUIREMENT="1"  ##compass5ea843
+export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python2.7"  ##compass5ea843
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="/opt/homebrewi/bin:$PATH"
