@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="ys"
 
-ZSH_CUSTOM="/Users/mariano.benedettini/work/home-directory/zsh_custom"
+ZSH_CUSTOM="$HOME/work/home-directory/zsh_custom"
 ZSH_THEME="mariano"
 
 # Example aliases
@@ -107,3 +107,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="/opt/homebrewi/bin:$PATH"
+
+# ZSH profiles directory
+export ZSH_DIR=~/zsh-profiles
+# default to, well, "default"
+export ZSH_PROFILE=${${ITERM_PROFILE:=default}:l}
+[[ -f "${ZSH_DIR}/.zshrc-${ZSH_PROFILE}" ]] && source "${ZSH_DIR}/.zshrc-${ZSH_PROFILE}"
